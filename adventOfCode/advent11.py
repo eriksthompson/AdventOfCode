@@ -11,7 +11,7 @@ def representsInt(s):
 #mi- monkey items (int list), o- operation (string list),
 # t - test divisible by,
 #  tr- if true throw to monkey #, fa - if false throw to monkey #
-mi, o, t, tr, fa = [], [], [], [], []
+mi, mi2, o, t, tr, fa = [], [], [], [], [], []
 with open('input11.txt') as file:
     data = file.read().splitlines()
     for l in data:
@@ -24,6 +24,7 @@ with open('input11.txt') as file:
                 if representsInt(s.strip(',')):
                     l1.append(int(s.strip(',')))
             mi.append(l1)
+            mi2.append(l1)
         elif s1[0] == 'Operation:':
             l1 = []
             l1.append(s1[-2])
@@ -88,6 +89,7 @@ def product(l):
     return ans
 
 def part2(rounds):
+    mi = mi2
     master_divisor = lcm(*(t1 for t1 in t))
     inspectC = [0] * len(mi)
     for r in range(rounds):
