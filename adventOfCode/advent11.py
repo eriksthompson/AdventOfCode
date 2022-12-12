@@ -36,7 +36,7 @@ with open('input11.txt') as file:
         elif s1[1] == 'false:':
             fa.append(int(s1[-1]))
         
-print(mi, o, t, tr, fa, sep='\n')
+#print(mi, o, t, tr, fa, sep='\n')
 def part1(rounds):
     inspectC = [0] * len(mi)
     for r in range(rounds):
