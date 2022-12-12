@@ -14,7 +14,6 @@ with open('input11.txt') as file:
     data = file.read().splitlines()
     for l in data:
         s1 = l.strip(' ').split(' ')
-        print(s1)
         if s1[0] == '':
             continue
         if s1[0] == 'Starting':
@@ -36,3 +35,34 @@ with open('input11.txt') as file:
             fa.append(int(s1[-1]))
         
 print(mi, o, t, tr, fa, sep='\n')
+def part1(rounds):
+    inspectC = [0] * len(mi)
+    for r in range(rounds):
+        #print(inspectC)
+        #iterate through monkeys
+        for m in range(len(mi)):
+            inspectC[m] = inspectC[m] + len(mi[m])
+            #iterate through monkey items
+            for i in range(len(mi[m])):
+                w = mi[m][0] #current item's worry level
+                mi[m].remove(w)
+                modifier = o[m][1]
+                if modifier == 'old':
+                    modifier = w
+                if o[m][0] == '*':
+                    w *= int(modifier)
+                elif o[m][0] == '+':
+                    w += int(modifier)
+                w = int(w/3)
+                if w % t[m] == 0:
+                    mi[tr[m]].append(w)
+                else:
+                    mi[fa[m]].append(w)
+    inspectC.sort(reverse=True)
+    return inspectC[0]*inspectC[1]
+
+# -> 20 rounds of monkey shenanigans
+print(part1(20))
+
+
+            
