@@ -8,8 +8,22 @@ with open('input13.txt') as file:
         pair1.append(eval(s[0]))
         pair2.append(eval(s[1]))
     
-def rightOrder(l, r):
-    if type(l) == int and type(r) == int:
+def rightOrder(a, b):
+    if type(a) == int and type(b) == list:
+        return rightOrder([a], b)
+    if type(a) == list and type(b) == int:
+        return rightOrder(a, [b])
+    if type(a) == list and type(b) == list:
+        for l, r in zip(a, b):
+            x = rightOrder(l, r)
+            if x is not None:
+                return x
+        return rightOrder(len(a), len(b))
+    if a == b:
+        return None
+    return a < b
+
+    """if type(l) == int and type(r) == int:
         if l < r:
             return True
         if l > r:
@@ -19,7 +33,7 @@ def rightOrder(l, r):
         l1 = min(len(l),len(r))
         while i < l1:
             o = rightOrder(l[i], r[i])
-            if o != None:
+            if o is not None:
                 return o
             i+=1
         if len(l) == l1:
@@ -29,12 +43,12 @@ def rightOrder(l, r):
     else:
         if type(l) == int:
             o = rightOrder([l], r)
-            if o != None:
+            if o is not None:
                 return o
         elif type(r) == int:
             o = rightOrder(l, [r])
-            if o != None:
-                return o
+            if o is not None:
+                return o"""
 
 def part1(): 
     ans = 0
