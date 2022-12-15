@@ -58,4 +58,21 @@ def part1():
             ans+=i
     print(ans)
 
+class Signal:
+    def __init__(self, arr):
+        self.arr = arr
+    def __lt__(self, other):
+        return rightOrder(self.arr, other.arr)
+
+def part2():
+    a, b = Signal([[2]]), Signal([[6]])
+    array1 = [a,b]
+    for sig1, sig2 in zip(pair1,pair2):
+        array1 += [Signal(sig1)]
+        array1 += [Signal(sig2)]
+    array1.sort()
+    print((array1.index(a)+1) * (array1.index(b)+1))
+
+
 part1()
+part2()
